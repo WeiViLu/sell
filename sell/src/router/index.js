@@ -5,7 +5,6 @@ import ratings from '@/components/ratings/ratings'
 import seller from '@/components/seller/seller'
 
 
-
 Vue.use(Router)
 
 export default new Router({
@@ -24,7 +23,7 @@ export default new Router({
       path:'/seller',
       name:'seller',
       component:seller
-    },
+    }
   ],
   linkActiveClass:'a-active'//配置active-class 的默认class
 })
