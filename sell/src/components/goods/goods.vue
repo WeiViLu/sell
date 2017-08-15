@@ -33,10 +33,12 @@
 				</li>
 			</ul>
 		</div>
+		<shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice" ref="shopcart"></shopcart>
 	</div>
 </template>
 <script>
 	import BScroll from 'better-scroll';
+	import shopcart from '../shopcart/shopcart';
 	const ERR_OK=0;
 	export default{
 		props:{
@@ -50,6 +52,9 @@
 				listHeight:[],
 				scrollY:0
 			}
+		},
+		components:{
+			shopcart
 		},
 		computed:{
 			currentIndex(){
@@ -81,10 +86,7 @@
 				if(!event._constructed){
 					return;
 				}
-				let foodList=this.$refs.foodWrapper.getElementsByClassName('food-list-hook');
-				let el=foodList[index];
-				this.foodScroll.scrollToElement(el,300);
-
+				let foodList=this.
 				console.log(index);
 			},
 			_initScroll(){
