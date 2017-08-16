@@ -28,7 +28,7 @@
 									<span class="now">¥{{food.price}}</span><span v-show="food.oldPrice"  class="old">¥{{food.oldPrice}} </span>
 								</div>
 								<div class="cartcontrol-wrapper">
-									<cartcontrol :food="food"></cartcontrol>
+									<cartcontrol :food="food" @add="addFood"></cartcontrol>
 								</div>
 							</div>
 						</li>
@@ -98,12 +98,18 @@
 			})
 		},
 		methods:{
+			addFood(target){
+				this._drop(target);
+			},
 			selectMenu(index,event){
 				if(!event._constructed){
 					return;
 				}
 				let foodList=this.
 				console.log(index);
+			},
+			_drop(target){
+				this.$refs.shopcart.drop(target);
 			},
 			_initScroll(){
 				this.menuScroll = new BScroll(this.$refs.menuWrapper,{
