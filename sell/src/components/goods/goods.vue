@@ -109,7 +109,9 @@
 				console.log(index);
 			},
 			_drop(target){
-				this.$refs.shopcart.drop(target);
+				this.$nextTick(() => {//体验优化，异步执行动画
+		          this.$refs.shopcart.drop(target)
+		        })
 			},
 			_initScroll(){
 				this.menuScroll = new BScroll(this.$refs.menuWrapper,{
