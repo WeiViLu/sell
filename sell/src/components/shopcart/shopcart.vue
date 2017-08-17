@@ -17,7 +17,8 @@
 						{{payDesc}}
 					</div>
 				</div>
-				<div class="ball-container">
+			</div>
+			<div class="ball-container">
 					<div v-for="ball in balls">
 						<transition name="drop"  @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop"> 
 							<div class="ball" v-show="ball.show">
@@ -25,33 +26,32 @@
 							</div>
 						</transition>
 					</div>
-				</div>
-				<transition name="fold">
-					<div class="shopcart-list" v-show="listShow">
-						<div class="list-header">
-							<h1 class="title">购物车</h1>
-							<span class="empty" @click="empty">清空</span>
-						</div>
-						<div class="list-content" ref="listContent">
-							<ul>
-								<li class="food" v-for="food in selectFoods">
-									<span class="name">{{food.name}}</span>
-									<div class="price">
-										<span>¥{{food.price*food.count}}</span>
-									</div>
-									<div class="cartcontrol-wrapper">
-										<cartcontrol :food="food"></cartcontrol>	
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</transition>
 			</div>
+			<transition name="fold">
+				<div class="shopcart-list" v-show="listShow">
+					<div class="list-header">
+						<h1 class="title">购物车</h1>
+						<span class="empty" @click="empty">清空</span>
+					</div>
+					<div class="list-content" ref="listContent">
+						<ul>
+							<li class="food" v-for="food in selectFoods">
+								<span class="name">{{food.name}}</span>
+								<div class="price">
+									<span>¥{{food.price*food.count}}</span>
+								</div>
+								<div class="cartcontrol-wrapper">
+									<cartcontrol  @add="addFood" :food="food"></cartcontrol>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</transition>
 		</div>
 		<transition name="fade">
-			<div class="list-mask" v-show="listShow" @click="hideList"></div>
-		</transition>
+	      <div class="list-mask" @click="hideList" v-show="listShow"></div>
+	    </transition>
 	</div>
 </template>
 <script>
@@ -63,10 +63,6 @@
 				type:Array,
 				default(){
 					return [
-						{
-							price:10,
-							count:1
-						}
 					];
 				}
 			},
@@ -143,7 +139,7 @@
 				if(show){
 					this.$nextTick(()=>{
 						if(!this.scroll){
-							this.scoll=new BScroll(this.$refs.listContent,{
+							this.scroll=new BScroll(this.$refs.listContent,{
 								click:true
 							})
 						}else{
@@ -156,6 +152,9 @@
 			}
 		},
 		methods:{
+			addFood(target){
+				this.drop(target);
+			},
 			drop(el){
 				for(let i=0;i<this.balls.length;i++){
 					let ball=this.balls[i];
@@ -397,6 +396,5 @@
 			transition:all 0.5s
 		&.fade-enter,&.fade-leave-active
 			opacity:0
-			background:rgba(7,17,27,0)
-						
+			background:rgba(7,17,27,0)					
 </style>
