@@ -110,8 +110,9 @@
 				if(!event._constructed){
 					return;
 				}
-				let foodList=this.
-				console.log(index);
+				 let foodList = this.$refs.foodWrapper.getElementsByClassName("food-list-hook")
+		        let el = foodList[index]
+		        this.foodScroll.scrollToElement(el,300)
 			},
 			_drop(target){
 				this.$nextTick(() => {//体验优化，异步执行动画
