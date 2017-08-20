@@ -54,10 +54,10 @@
 	</div>
 </template>
 <script>
-	import star from '../star/star'
+	import star from '../star/star';
 	import split from '../split/split';
-	import ratingselect from '../ratingselect/ratingselect'
-	import {formatDate} from '../../common/js/date'
+	import ratingselect from '../ratingselect/ratingselect';
+	import {formatDate} from '../../common/js/date';
 	import BScroll from 'better-scroll';
 	const POSITIVE=0;
 	const NEGATIVE=1;
