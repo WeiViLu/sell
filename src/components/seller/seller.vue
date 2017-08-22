@@ -71,6 +71,7 @@
 	import split from '../split/split';
 	import star from '../star/star';
 	import BScroll from 'better-scroll';
+	import {saveToLocal, loadFromLocal} from '../../common/js/store'
 	export default{
 		props:{
 			seller:{
@@ -79,7 +80,9 @@
 		},
 		data(){
 			return{
-				favorite:false
+				favorite: (() => {
+		          return loadFromLocal(this.seller.id, 'favorite', false)
+		        })()
 			}
 		},
 		computed:{
@@ -179,8 +182,7 @@
 			.favorite
 				position:absolute
 				width:50px
-				height:5px
-				right:18px
+				right:11px
 				top:18px
 				text-align:center
 				.icon-favorite

@@ -12,17 +12,27 @@
           <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
+    import {urlParse} from './common/js/util.js';
     import header from './components/header/header.vue';
     const ERR_OK=0;
     export default {
       data(){
         return{
-          seller:{}
+          seller:{
+              id:(()=>{
+                let queryParam=urlParse();
+                console.log(queryParam);
+                console.log(1111);
+                return queryParam.id;
+              })()
+          }
         }
       },
       created(){
